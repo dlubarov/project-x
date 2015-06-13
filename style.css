@@ -1,0 +1,43 @@
+@font-face {
+    font-family: Mercedes;
+    src: url(corporate-a-bq.ttf);
+}
+
+body {
+    font-family: Mercedes;
+
+    background-color: black;
+
+    background-image: url('mercedes-benz-classic-logo-12-12.jpg');
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+h1 {
+    text-align: center;
+    color: white;
+}
+
+.item {
+    background-color: white;
+    margin: 10px;
+    padding: 30px;
+    /* border: 2px solid lightgray; */
+    opacity: 0.9;
+}
+
+.selected-item {
+    background-color: lightblue;
+}
+
+.name {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.location-name {
+    color: gray;
+    margin-top: 10px;
+}

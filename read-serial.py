@@ -3,7 +3,7 @@
 import serial, sys
 
 # Each test bench is labeled with the serial device name on the USB cable
-device_name = '/dev/cu.usbserial-FTWDTKXJ'
+device_name = '/dev/cu.usbserial-FTGQEZB8'
 baud_rate   = 115200
 
 # Set up the serial port connection
