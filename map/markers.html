@@ -13,11 +13,16 @@
   <script type="text/javascript" charset="UTF-8"
     src="https://js.api.here.com/v3/3.0/mapsjs-mapevents.js"></script>
   <script src="lodash.js"></script>
+   <script src="http://cdn.pubnub.com/pubnub-3.7.1.min.js"></script>
 </head>
 <body>
   <div id="map" style="width: 100%; height: 400px; background: grey" />
   <script  type="text/javascript" charset="UTF-8" >
-    
+
+ var pubnub = PUBNUB.init({
+     publish_key: 'pub-c-22aec4e6-3009-4950-a1ee-816d158ceb65',
+     subscribe_key: 'sub-c-aec92fe2-1209-11e5-86e0-0619f8945a4f'
+ });
 /**
  * Adds two SVG markers over the homes of the Chicago Bears and Chicago Cubs
  *
@@ -112,13 +117,35 @@ function modifyActiveId(increase, dataPoints) {
   } else {
     newIndex = index - 1
   }
+  newIndex += dataPoints.length
+  newIndex %= dataPoints.length
   activeId = dataPoints[newIndex].id
 }
 
-function flicker() {
+function refresh() {
   map.removeObjects(map.getObjects())
   addSVGMarkers(map, dataPoints, activeId);
 }
+
+function inc(){
+  modifyActiveId(true, dataPoints)
+  refresh()
+}
+
+function dec(){
+  modifyActiveId(false, dataPoints)
+  refresh()
+}
+ pubnub.subscribe({
+    channel: 'demo',
+    message: function(m){
+      inc()
+    },
+    error: function (error) {
+      // Handle error here
+      console.log(JSON.stringify(error));
+    }
+ });
   </script>
 </body>
 </html>
