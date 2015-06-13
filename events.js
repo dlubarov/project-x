@@ -58,6 +58,7 @@ function refreshEvents() {
     events = resp.items.map(function(gcal_event) {
       requestCoordinates(gcal_event.location);
       return {
+        'id': gcal_event.id,
         'name': gcal_event.summary,
         'location': gcal_event.location,
       };
