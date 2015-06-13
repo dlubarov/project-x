@@ -12,20 +12,20 @@ function refreshList() {
 
     var event_list = getEventList();
 
-    for( var e in event_list ) {
+    for(var e = 0; e < event_list.length; e += 1) {
         // Create an 'item' div
         var item = document.createElement('div');
         item.id = 'item_' + e;
         item.className = 'item';
-        item.event_id = e.id;
+        item.event_id = event_list[e].id;
 
-        if( e.id == selected_event_id ) {
-            this.className += ' selected-item';
+        if( event_list[e].id == selected_event_id ) {
+            item.className += ' selected-item';
         }
 
         // Add onclick event (for now)
-        item.onclick = function() {
-            jQuery('.selected-item').removeClass('selected-item');
+        item.onclick = function(e) {
+            $('.selected-item').removeClass('selected-item');
             this.className += ' selected-item';
             selected_event_id = this.event_id;
         }
@@ -48,6 +48,8 @@ function refreshList() {
         items.appendChild( item );
     }
 
+    console.log( $( '.selected-item' ).length );
     if( $( '.selected-item' ).length == 0 ) {
+        $('.item').first().addClass('selected-item');
     }
 }
