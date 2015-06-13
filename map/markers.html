@@ -12,7 +12,7 @@
     src="https://js.api.here.com/v3/3.0/mapsjs-ui.js"></script>
   <script type="text/javascript" charset="UTF-8"
     src="https://js.api.here.com/v3/3.0/mapsjs-mapevents.js"></script>
-
+  <script src="lodash.js"></script>
 </head>
 <body>
   <div id="map" style="width: 100%; height: 400px; background: grey" />
@@ -32,10 +32,10 @@ function addSVGMarkers(map, data, activeId){
 
   // Add the first marker
   var textMarker = function(item) {
-    text = item.text
+    var text = item.name;
     return new H.map.Icon(
       svgMarkup
-        .replace('${FILL}', (item.id = activeId) ? 'orange' : 'white')
+        .replace('${FILL}', (item.id === activeId) ? 'orange' : 'white')
         .replace('${STROKE}', '000')
         .replace('${OUTER_WIDTH}', text.length*12)
         .replace('${WIDTH}', text.length*12)
@@ -88,7 +88,7 @@ var dataPoints = [
 {
   name: 'super duper event',
   lat: 37.380,
-  lng: -122.302
+  lng: -122.302,
   id: 3
 }
 ]
@@ -104,6 +104,21 @@ var ui = H.ui.UI.createDefault(map, defaultLayers);
 
 // Now use the map as required...
 addSVGMarkers(map, dataPoints, activeId);
+
+function modifyActiveId(increase, dataPoints) {
+  index = _.findIndex(dataPoints, function(i){ return i.id == activeId })
+  if (increase) {
+    newIndex = index + 1
+  } else {
+    newIndex = index - 1
+  }
+  activeId = dataPoints[newIndex].id
+}
+
+function flicker() {
+  map.removeObjects(map.getObjects())
+  addSVGMarkers(map, dataPoints, activeId);
+}
   </script>
 </body>
 </html>
