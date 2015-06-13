@@ -48,7 +48,6 @@ function refreshList() {
         items.appendChild( item );
     }
 
-    console.log( $( '.selected-item' ).length );
     if( $( '.selected-item' ).length == 0 ) {
         $('.item').first().addClass('selected-item');
     }
