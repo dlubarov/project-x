@@ -43,13 +43,17 @@ var platform = new H.service.Platform({
 });
 var defaultLayers = platform.createDefaultLayers();
 
+homeLocation = {lat:37.485, lng:-122.209}
+
 //Step 2: initialize a map - this map is centered over Chicago.
 var map = new H.Map(document.getElementById('map'),
   defaultLayers.normal.map,{
-  center: {lat:37.485, lng:-122.209},
+  center: homeLocation,
   zoom: 11
 });
 
+map.setBaseLayer(defaultLayers.normal.traffic);
+map.addLayer(defaultLayers.incidents);
 //Step 3: make the map interactive
 // MapEvents enables the event system
 // Behavior implements default interactions for pan/zoom (also on mobile touch environments)
@@ -58,16 +62,25 @@ var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
 // Create the default UI components
 var ui = H.ui.UI.createDefault(map, defaultLayers);
 
+
+graphInitialized = false
+
 function hardRefreshMap(){
   var dataPoints = getEventList();
   map.removeObjects(map.getObjects())
   addSVGMarkers(map, dataPoints, activeId);
+  if (graphInitialized == false){
+    var icon = new H.map.Icon('mercedes-benz-xxl-small.png');
+    var marker = new H.map.Marker({ lat: homeLocation.lat, lng: homeLocation.lng }, { icon: icon });
+    map.addObject(marker);
+    graphInitialized == true
+  }
 }
 
 window.oldDataPoints = []
 function refreshMap() {
   var dataPoints = getEventList();
-  if ((dataPoints == undefined) || (window.oldDataPoints.length != dataPoints.length)){
+  if ((dataPoints == undefined) || (window.oldDataPoints == undefined) || (window.oldDataPoints.length != dataPoints.length)){
     hardRefreshMap()
   }
   window.oldDataPoints = dataPoints

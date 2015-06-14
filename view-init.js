@@ -1,4 +1,4 @@
-$('.slide2').hide()
+$('.slide1').hide()
 
 window.activeId = null
 
