@@ -46,6 +46,7 @@ var platform = new H.service.Platform({
 var defaultLayers = platform.createDefaultLayers();
 
 //Step 2: initialize a map - this map is centered over Chicago.
+var homeLocation = {lat:37.485, lng:-122.209}
 var map = new H.Map(document.getElementById('map'),
   defaultLayers.normal.map,{
   center: window.homeLocation,
