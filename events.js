@@ -43,12 +43,32 @@ function CalEvent(gcal_event){
   requestCoordinates(gcal_event.location);
   this.id = gcal_event.id;
   this.time = formatDate(new Date(gcal_event.start.dateTime));
+  this.dateTime = gcal_event.start.dateTime;
+  this.time = formatDate(new Date(gcal_event.start.dateTime));
   this.name = gcal_event.summary;
   this.location = gcal_event.location;
   this.setup = function(){
     this.coordinates = reverseGeocoderResults[this.location];
     routeDistanceInSeconds(this)
   }.bind(this)
+  this.travelTime = function(){
+    fl =  (this.routeSummary.trafficeTime / 60.0)
+    return Math.floor(fl)
+  }
+  this.trafficTime = function(){
+    fl =  ((this.routeSummary.trafficTime - this.routeSummary.baseTime) / 60.0)
+    return Math.floor(fl)
+  }
+  this.toTime = function(){
+    now = new Date
+    then = new Date(this.dateTime)
+    fl =  ((then - now) / 60 / 1000)
+    return Math.floor(fl)
+  }
+  this.leaveTime = function(){
+    then = new Date(this.dateTime)
+    earlier = then - (this.trafficTime * 60)
+  }
 }
 
 function refreshEvents() {
