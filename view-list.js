@@ -16,6 +16,13 @@ function refreshList(event_list) {
         item.onclick = function(e) {
             $('.selected-item').removeClass('selected-item');
             selectItem(this.event_id);
+
+            var n = $(this).find('.name').text();
+            var l = $(this).find('.location').text();
+            var t = $(this).find('.time').text();
+
+            // Say the selected event
+            responsiveVoice.speak( n + ' at ' + l + ' at ' + t );
         }
 
         // Time
@@ -36,7 +43,7 @@ function refreshList(event_list) {
         var t = document.createTextNode( event_list[e].location );
         location.appendChild( t );
         item.appendChild( location );
-        location.className += ' location-name';
+        location.className += ' location';
 
         // Append to 'items' div
         var items = document.getElementById('items');
