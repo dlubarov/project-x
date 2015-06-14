@@ -55,21 +55,23 @@ function CalEvent(gcal_event){
   this.travelTime = function(){
     fl =  (this.routeSummary.trafficeTime / 60.0)
     return Math.floor(fl)
-  }
+  }.bind(this)
   this.trafficTime = function(){
     fl =  ((this.routeSummary.trafficTime - this.routeSummary.baseTime) / 60.0)
     return Math.floor(fl)
-  }
+  }.bind(this)
   this.toTime = function(){
     now = new Date
     then = new Date(this.dateTime)
     fl =  ((then - now) / 60 / 1000)
     return Math.floor(fl)
-  }
+  }.bind(this)
   this.leaveTime = function(){
     then = new Date(this.dateTime)
-    earlier = then - (this.trafficTime * 60)
-  }
+    earlier = then - (this.routeSummary.trafficTime)
+    earlierDate = new Date(earlier)
+    return formatDate(earlierDate)
+  }.bind(this)
 }
 
 function refreshEvents() {
