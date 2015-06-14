@@ -2,12 +2,13 @@
 var SMS_ENABLED = false;
 
 function onSwipeLeft() {
+  $('.slide1').css({position: 'absolute', height: '100%'});
   $('.slide1').animate({ left: '-100%' }, 500);
   $('.slide2').animate({ left: '0' }, 500);
 }
 
 function onSwipeRight() {
-  $('.slide1').animate({ left: '0' }, 500);
+  $('.slide1').animate({ left: '0' }, 500, function() { $('.slide1').css({position: 'static', height: 'auto'}); });
   $('.slide2').animate({ left: '100%' }, 500);
 }
 
@@ -17,22 +18,25 @@ function onSwipeUp() {
 function onSwipeDown() {
   $('.slide1').animate({ top: '0' }, 500);
   $('.slide2').animate({ top: '0' }, 500);
-  $('.slide3').animate({ top: '100%' }, 500);
+  $('.slide3').animate({ top: '100%' }, 500, function() { $('.slide3').hide(); });
 }
 
 function onRotateClockwise() {
   modifyActiveId(true, getEventList())
   refreshAll()
   hardRefreshMap()
+  scroll();
 }
 
 function onRotateCounterClockwise() {
   modifyActiveId(false, getEventList())
   refreshAll()
   hardRefreshMap()
+  scroll();
 }
 
 function onPress() {
+  $('.slide3').show();
   var element = $('.item').filter(function() { return this.event_id == activeId; })[0];
 
   $('.selected-item').removeClass('selected-item');
@@ -69,4 +73,61 @@ function onPress() {
       console.log(e);
     });
   }
+}
+
+function scroll() {
+    if( $( '.selected-item' ).length ) {
+        $('#pager').scrollTo('.selected-item');
+        //var pagerHeight = $('#pager').height();
+        //var scroll = $(".selected-item").offset().top - pagerHeight/2;
+        //var min = 0;
+        //var max = $('.slide1').height() - pagerHeight;
+        //if (max < 0) max = 0;
+        //if (scroll < min) scroll = min;
+        //if (scroll > max) scroll = max;
+        //$('#pager').animate({
+        //    scrollTop: scroll
+        //}, 100);
+    }
+}
+
+$.fn.scrollTo = function( target, options, callback ){
+  if(typeof options == 'function' && arguments.length == 2){ callback = options; options = target; }
+  var settings = $.extend({
+    scrollTarget  : target,
+    offsetTop     : 50,
+    duration      : 250,
+    easing        : 'swing'
+  }, options);
+  return this.each(function(){
+    var scrollPane = $(this);
+    var scrollTarget = (typeof settings.scrollTarget == "number") ? settings.scrollTarget : $(settings.scrollTarget);
+    var pagerHeight = $('#pager').outerHeight();
+    var scrollY = scrollTarget.offset().top + scrollPane.scrollTop() - pagerHeight/2 + 50;
+    var max = $('.slide1').outerHeight() - pagerHeight + 10;
+    if (max < 0) max = 0;
+    if (scrollY > max) scrollY = max;
+    scrollPane.animate({scrollTop : scrollY }, parseInt(settings.duration), settings.easing, function(){
+      if (typeof callback == 'function') { callback.call(this); }
+    });
+  });
+}
+
+function scrollToView(element){
+    var offset = element.offset().top;
+    if(!element.is(":visible")) {
+        element.css({"visiblity":"hidden"}).show();
+        var offset = element.offset().top;
+        element.css({"visiblity":"", "display":""});
+    }
+
+    var visible_area_start = $(window).scrollTop();
+    var visible_area_end = visible_area_start + window.innerHeight;
+
+    if(offset < visible_area_start || offset > visible_area_end){
+         // Not in view so scroll to it
+         $('#pager').animate({scrollTop: offset - window.innerHeight/3}, 1000);
+         return false;
+    }
+    return true;
 }
