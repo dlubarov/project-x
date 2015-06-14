@@ -15,8 +15,7 @@ function refreshList(event_list) {
         // Add onclick event (for now)
         item.onclick = function(e) {
             $('.selected-item').removeClass('selected-item');
-            this.className += ' selected-item';
-            window.activeId = this.event_id;
+            selectItem(this.event_id);
         }
 
         // Time
@@ -44,7 +43,12 @@ function refreshList(event_list) {
         items.appendChild( item );
     }
 
-    if( $( '.selected-item' ).length == 0 ) {
-        $('.item').first().addClass('selected-item');
+    if( $('.item').length > 0 && $( '.selected-item' ).length == 0 ) {
+        selectItem($('.item')[0].event_id);
     }
+}
+
+function selectItem(id) {
+    activeId = id;
+    $('.item').filter(function() { return this.event_id == id; }).addClass('selected-item');
 }
