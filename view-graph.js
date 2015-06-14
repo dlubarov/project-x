@@ -56,8 +56,20 @@ var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
 // Create the default UI components
 var ui = H.ui.UI.createDefault(map, defaultLayers);
 
-function refreshMap(dataPoints, activeId) {
+function hardRefreshMap(){
+  var dataPoints = getEventList();
   map.removeObjects(map.getObjects())
   addSVGMarkers(map, dataPoints, activeId);
 }
+
+window.oldDataPoints = []
+function refreshMap() {
+  var dataPoints = getEventList();
+  if ((dataPoints == undefined) || (window.oldDataPoints.length != dataPoints.length)){
+    hardRefreshMap()
+  }
+  window.oldDataPoints = dataPoints
+}
+
+
 

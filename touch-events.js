@@ -5,8 +5,10 @@ function touchEvent(event) {
   } else if (event == 'clockwise'){
     modifyActiveId(true, getEventList())
     refreshAll()
+    hardRefreshMap()
   } else if (event == 'counterclockwise'){
     modifyActiveId(false, getEventList())
     refreshAll()
+    hardRefreshMap()
   }
 }

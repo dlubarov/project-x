@@ -12,12 +12,13 @@ function setupAll() {
     activeId = event_list[0].id
   }
   refreshAll()
+  hardRefreshMap()
 }
 
 function refreshAll(){
   var event_list = getEventList();
   refreshList(event_list)
-  refreshMap(event_list, activeId)
+  refreshMap()
 }
 
 function modifyActiveId(increase, dataPoints) {
