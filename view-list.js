@@ -1,16 +1,8 @@
-var INTERVAL = 1000;
-
 var selected_event_id;
 
-function setupList() {
-    setInterval(refreshList, INTERVAL);
-    refreshList();
-}
-
-function refreshList() { 
+function refreshList(event_list) {
     $('#items').empty();
 
-    var event_list = getEventList();
 
     for(var e = 0; e < event_list.length; e += 1) {
         // Create an 'item' div
