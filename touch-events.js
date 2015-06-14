@@ -40,11 +40,11 @@ function onPress() {
   var t = $(element).find('.time').text();
 
   // Say the selected event
-  responsiveVoice.speak( n + ' at ' + l + ' at ' + t );
+  responsiveVoice.speak( 'Getting directions to ' + l );
 
   $('.slide1').animate({ top: '-100%' }, 500);
   $('.slide2').animate({ top: '-100%' }, 500);
   $('.slide3').animate({ top: '0' }, 500);
 
-  display_route(window.homeLocation, element.coords);
+  display_route(window.homeLocation, element.coords, n, l, t);
 }

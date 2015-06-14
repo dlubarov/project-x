@@ -48,6 +48,15 @@ h1 {
   float: right;
 }
 
+#eventName, #eventLocation, #eventTime {
+    font-size: 1.5em;
+    padding: 10px;
+}
+
+#eventName {
+    font-size: 2em;
+}
+
 #pager {
   position: absolute;
   width: 100%;
