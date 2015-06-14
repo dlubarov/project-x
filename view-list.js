@@ -7,6 +7,7 @@ function refreshList(event_list) {
         item.id = 'item_' + e;
         item.className = 'item';
         item.event_id = event_list[e].id;
+        item.event_location = event_list[e].location;
         item.coords = event_list[e].coordinates;
 
         if( event_list[e].id == window.activeId ) {

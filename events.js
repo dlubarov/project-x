@@ -54,7 +54,7 @@ function CalEvent(gcal_event){
 function refreshEvents() {
   var timeMin = new Date();
   var timeMax = new Date();
-  timeMax.setHours(timeMax.getHours() + 12);
+  timeMax.setHours(timeMax.getHours() + 24);
 
   var request = gapi.client.calendar.events.list({
     'calendarId': 'primary',
