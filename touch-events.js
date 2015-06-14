@@ -20,6 +20,16 @@ function onRotateCounterClockwise() {
   hardRefreshMap()
 }
 
-function onSelect() {
-  alert('select');
+function onPress() {
+  var element = $('.item').filter(function() { return this.event_id == activeId; })[0];
+
+  $('.selected-item').removeClass('selected-item');
+  selectItem(activeId);
+
+  var n = $(element).find('.name').text();
+  var l = $(element).find('.location').text();
+  var t = $(element).find('.time').text();
+
+  // Say the selected event
+  responsiveVoice.speak( n + ' at ' + l + ' at ' + t );
 }
