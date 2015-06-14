@@ -1,4 +1,4 @@
-var MAX_EVENTS = 4;
+var MAX_EVENTS = 9;
 var REFRESH_INTERVAL = 500000;
 
 var events = [];
