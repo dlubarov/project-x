@@ -45,5 +45,6 @@ function onPress() {
   $('.slide1').animate({ top: '-100%' }, 500);
   $('.slide2').animate({ top: '-100%' }, 500);
   $('.slide3').animate({ top: '0' }, 500);
-  display_route();
+
+  display_route(window.homeLocation, element.coords);
 }

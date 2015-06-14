@@ -45,12 +45,10 @@ var platform = new H.service.Platform({
 });
 var defaultLayers = platform.createDefaultLayers();
 
-homeLocation = {lat:37.485, lng:-122.209}
-
 //Step 2: initialize a map - this map is centered over Chicago.
 var map = new H.Map(document.getElementById('map'),
   defaultLayers.normal.map,{
-  center: homeLocation,
+  center: window.homeLocation,
   zoom: 11
 });
 
@@ -73,7 +71,7 @@ function hardRefreshMap(){
   addSVGMarkers(map, dataPoints, activeId);
   if (graphInitialized == false){
     var icon = new H.map.Icon('mercedes-benz-xxl-small.png');
-    var marker = new H.map.Marker({ lat: homeLocation.lat, lng: homeLocation.lng }, { icon: icon });
+    var marker = new H.map.Marker({ lat: window.homeLocation.lat, lng: window.homeLocation.lng }, { icon: icon });
     map.addObject(marker);
     graphInitialized == true
   }

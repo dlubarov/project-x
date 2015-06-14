@@ -1,4 +1,5 @@
 window.activeId = null
+window.homeLocation = {lat:37.485, lng:-122.209}
 
 var INTERVAL = 1000;
 

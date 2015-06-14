@@ -54,7 +54,7 @@
             (C) HERE 2014
         */
 
-        function display_route() {
+        function display_route(start_coords, end_coords) {
             // Check whether the environment should use hi-res maps
             var hidpi = ('devicePixelRatio' in window && devicePixelRatio > 1);
 
@@ -71,7 +71,7 @@
             
             map = new H.Map(mapContainer, maptypes.normal.map, 
                 {
-                    center: new H.geo.Point((37.586605 + 37.490957) / 2, (-122.347502 + -122.237456) / 2),
+                    center: new H.geo.Point((start_coords.lat + end_coords.lat) / 2, (start_coords.lng + end_coords.lng) / 2),
                     zoom: 12
                 }
             );
@@ -98,8 +98,8 @@
             function calculateRoute()
             {
                 var calculateRouteParams = {
-                    'waypoint0': 37.586605 + "," + -122.347502,
-                    'waypoint1': 37.490957 + "," + -122.237456,                  
+                    'waypoint0': start_coords.lat + "," + start_coords.lng,
+                    'waypoint1': end_coords.lat + "," + end_coords.lng,
                     'mode': 'fastest;car;traffic:disabled',
                     'representation': 'display'
                 },
