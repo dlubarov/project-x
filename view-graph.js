@@ -5,7 +5,8 @@
  */
 function addSVGMarkers(map, data, activeId){
   //Create the svg mark-up
-  var svgMarkup = '<svg  width="${OUTER_WIDTH}" height="36" xmlns="http://www.w3.org/2000/svg">' +
+  var svgMarkup = '<svg  width="${OUTER_WIDTH}" height="60" xmlns="http://www.w3.org/2000/svg">' +
+    '<polyline left="30" points="20,37  40,37  30,55" style="fill:${TRIANGLE};" fill-opacity="${T_OPACITY}"/>' +
     '<rect fill="${FILL}" stroke="#fff" stroke-width="0" x="1" fill-opacity="${OPACITY}" y="1" width="${WIDTH}" height="36" />' +
     '<text x="100" y="25" font-size="16pt" font-family="Menlo" text-anchor="start"  fill="${STROKE}" >${TEXT}</text>' +
     '<text x="${X}" y="25" font-size="16pt" font-family="Menlo" font-weight="bold" text-anchor="end" fill="${TIME_STROKE}" >${TIME_INFO}</text>' +
@@ -18,11 +19,13 @@ function addSVGMarkers(map, data, activeId){
     return new H.map.Icon(
       svgMarkup
         .replace('${FILL}', (item.id === activeId) ? "#F58100" : "#666")
+        .replace('${TRIANGLE}', (item.id === activeId) ? "#F58100" : "#666")
         .replace('${FONT_WEIGHT}', (item.id === activeId) ? "bold" : "normal")
         .replace('${STROKE}', '#fff')
         .replace('${TIME_STROKE}', '#fff')
         .replace('${TIME_INFO}', time)
         .replace('${OPACITY}', (item.id === activeId) ? "1" : item.opacity())
+        .replace('${T_OPACITY}', (item.id === activeId) ? "1" : item.opacity())
         .replace('${STROKE_WIDTH}', (item.id === activeId) ? "1" : "0")
         .replace('${OUTER_WIDTH}', (text.length*16 + 70))
         .replace('${WIDTH}', text.length*16 + 70)
