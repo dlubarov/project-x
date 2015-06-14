@@ -20,12 +20,10 @@ function calendarSetup() {
 // Get the latest availble list of events. Should be called repeatedly in order to see new events.
 function getEventList() {
   return events.map(function(e) {
-    e.coordinates = reverseGeocoderResults[e.location];
-    routeDistanceInSeconds(e)
+    e.setup()
     return e;
   });
 }
-
 
 function handleAuthResult(authResult) {
   if (authResult && !authResult.error) {
@@ -47,7 +45,10 @@ function CalEvent(gcal_event){
   this.time = formatDate(new Date(gcal_event.start.dateTime));
   this.name = gcal_event.summary;
   this.location = gcal_event.location;
-  return this
+  this.setup = function(){
+    this.coordinates = reverseGeocoderResults[this.location];
+    routeDistanceInSeconds(this)
+  }.bind(this)
 }
 
 function refreshEvents() {
