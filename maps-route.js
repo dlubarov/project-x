@@ -1,4 +1,10 @@
-function display_route(start_coords, end_coords) {
+function display_route(start_coords, end_coords, event_name, event_location, event_time) {
+
+    // Add note information
+    $('.noteContainer').append('<div id="eventName">' + event_name + '</div>');
+    $('.noteContainer').append('<div id="eventLocation">' + event_location + '</div>');
+    $('.noteContainer').append('<div id="eventTime">' + event_time + '</div>');
+
     // Check whether the environment should use hi-res maps
     var hidpi = ('devicePixelRatio' in window && devicePixelRatio > 1);
 
