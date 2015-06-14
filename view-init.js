@@ -17,7 +17,7 @@ function setupAll() {
 function refreshAll(){
   var event_list = getEventList();
   refreshList(event_list)
-  setupMap(event_list)
+  refreshMap(event_list, activeId)
 }
 
 function modifyActiveId(increase, dataPoints) {

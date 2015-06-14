@@ -32,10 +32,6 @@ function addSVGMarkers(map, data, activeId){
   }
 }
 
-/**
- * Boilerplate map initialization code starts below:
- */
-
 //Step 1: initialize communication with the platform
 var platform = new H.service.Platform({
   app_id: 'DemoAppId01082013GAL',
@@ -52,27 +48,6 @@ var map = new H.Map(document.getElementById('map'),
   zoom: 11
 });
 
-//var dataPoints = [
-//{
-  //name: 'event1',
-  //lat: 37.490,
-  //lng: -122.000,
-  //id: 1
-//},
-//{
-  //name: 'superbowl',
-  //lat: 37.400,
-  //lng: -122.100,
-  //id: 2
-//},
-//{
-  //name: 'super duper event',
-  //lat: 37.380,
-  //lng: -122.302,
-  //id: 3
-//}
-//]
-
 //Step 3: make the map interactive
 // MapEvents enables the event system
 // Behavior implements default interactions for pan/zoom (also on mobile touch environments)
@@ -81,8 +56,7 @@ var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
 // Create the default UI components
 var ui = H.ui.UI.createDefault(map, defaultLayers);
 
-function setupMap() {
-  dataPoints = getEventList();
+function refreshMap(dataPoints, activeId) {
   map.removeObjects(map.getObjects())
   addSVGMarkers(map, dataPoints, activeId);
 }
