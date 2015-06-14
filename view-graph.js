@@ -6,9 +6,9 @@
 function addSVGMarkers(map, data, activeId){
   //Create the svg mark-up
   var svgMarkup = '<svg  width="${OUTER_WIDTH}" height="26" xmlns="http://www.w3.org/2000/svg">' +
-    '<rect fill="${FILL}" stroke="#000" stroke-width="${STROKE_WIDTH}" x="1" fill-opacity="${OPACITY}" y="1" width="${WIDTH}" height="30" />' +
-    '<text x="90" y="20" font-size="12pt" font-family="Arial" text-anchor="start"  fill="${STROKE}" >${TEXT}</text>' +
-    '<text x="${X}" y="20" font-size="13pt" font-family="Arial" font-weight="bold" text-anchor="end" fill="${TIME_STROKE}" >${TIME_INFO}</text>' +
+    '<rect fill="${FILL}" stroke="#fff" stroke-width="0" x="1" fill-opacity="${OPACITY}" y="1" width="${WIDTH}" height="30" />' +
+    '<text x="90" y="20" font-size="13pt" font-family="Arial" text-anchor="start"  fill="${STROKE}" >${TEXT}</text>' +
+    '<text x="${X}" y="20" font-size="14pt" font-family="Arial" font-weight="bold" text-anchor="end" fill="${TIME_STROKE}" >${TIME_INFO}</text>' +
     '</svg>';
 
   // Add the first marker
@@ -17,15 +17,15 @@ function addSVGMarkers(map, data, activeId){
     var text = item.name
     return new H.map.Icon(
       svgMarkup
-        .replace('${FILL}', (item.id === activeId) ? "#000" : "#666")
+        .replace('${FILL}', (item.id === activeId) ? "#F58100" : "#666")
         .replace('${FONT_WEIGHT}', (item.id === activeId) ? "bold" : "normal")
         .replace('${STROKE}', '#fff')
         .replace('${TIME_STROKE}', '#fff')
         .replace('${TIME_INFO}', time)
         .replace('${OPACITY}', (item.id === activeId) ? "1" : item.opacity())
         .replace('${STROKE_WIDTH}', (item.id === activeId) ? "1" : "0")
-        .replace('${OUTER_WIDTH}', (text.length*11 + 20))
-        .replace('${WIDTH}', text.length*11 + 30)
+        .replace('${OUTER_WIDTH}', (text.length*11 + 50))
+        .replace('${WIDTH}', text.length*11 + 40)
         .replace('${X}', text.length*1.5 + 40)
         .replace('${TEXT}', text)
       )
