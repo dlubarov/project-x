@@ -1,5 +1,3 @@
-$('.slide1').hide()
-
 window.activeId = null
 
 var INTERVAL = 1000;

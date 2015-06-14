@@ -1,11 +1,11 @@
 function onSwipeLeft() {
-  $('.slide1').hide();
-  $('.slide2').show();
+  $('.slide1').animate({ left: '-100%' }, 500);
+  $('.slide2').animate({ left: '0' }, 500);
 }
 
 function onSwipeRight() {
-  $('.slide1').show();
-  $('.slide2').hide();
+  $('.slide1').animate({ left: '0' }, 500);
+  $('.slide2').animate({ left: '100%' }, 500);
 }
 
 function onRotateClockwise() {
@@ -32,4 +32,9 @@ function onPress() {
 
   // Say the selected event
   responsiveVoice.speak( n + ' at ' + l + ' at ' + t );
+
+  $('.slide1').animate({ top: '-100%' }, 500);
+  $('.slide2').animate({ top: '-100%' }, 500);
+  $('.slide3').animate({ left: '0' }, 500);
+  display_route();
 }

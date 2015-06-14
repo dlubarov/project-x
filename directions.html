@@ -1,43 +1,13 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Chloe</title>
-    <link rel="stylesheet" type="text/css" href="reset.css"></link>
-    <link rel="stylesheet" type="text/css" href="style.css"></link>
-    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-    <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-    <link rel="stylesheet" type="text/css"
-      href="https://js.api.here.com/v3/3.0/mapsjs-ui.css" />
-    <link rel="stylesheet" type="text/css" href="defaults.css">
-    <script type="text/javascript" charset="UTF-8"
-      src="https://js.api.here.com/v3/3.0/mapsjs-core.js"></script>
-    <script type="text/javascript" charset="UTF-8"
-      src="https://js.api.here.com/v3/3.0/mapsjs-service.js"></script>
-    <script type="text/javascript" charset="UTF-8"
-      src="https://js.api.here.com/v3/3.0/mapsjs-ui.js"></script>
-    <script type="text/javascript" charset="UTF-8"
-      src="https://js.api.here.com/v3/3.0/mapsjs-mapevents.js"></script>
-    <script type="text/javascript" charset="UTF-8" src="defaults.js"></script>
-    <script type="text/javascript" charset="UTF-8" src="releaseRequests.js"></script>
-    <script src="http://code.responsivevoice.org/responsivevoice.js"></script>
-    <script src="lodash.js"></script>
-    <script src="http://cdn.pubnub.com/pubnub-3.7.1.min.js"></script>
-    <script src="https://apis.google.com/js/client.js"></script>
-    <script type="text/javascript" src="events.js"></script>
-    <script type="text/javascript" src="pubnub.js"></script>
-    <script type="text/javascript" src="view-list.js"></script>
-</head>
-<body onload="calendarSetup(); setupAll()">
-  <div id="pager">
-    <div class="slide slide1">
-      <h1>Good Morning, Daniel.</h1>
-      <div id="items"></div>
-    </div>
-    <div class="slide slide2">
-      <div id="map" style="width: 100%; height: 700px; background: grey"></div>
-    </div>
-    <div class="slide slide3">
-      <div id="directions">
+    <head>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        <title>Simple Routing</title>
+        <script type="text/javascript" charset="UTF-8" src="defaults.js"></script>
+        <script type="text/javascript" charset="UTF-8" src="releaseRequests.js"></script>
+        <link rel="stylesheet" type="text/css" href="defaults.css">
+    </head>
+    <body>
         <div class="noteContainer" style="display:none">
             <tr>
                 <td>HLP Service releases which are used in this demo:</td>
@@ -54,11 +24,10 @@
             (C) HERE 2014
         */
 
-        function display_route() {
-            // Check whether the environment should use hi-res maps
-            var hidpi = ('devicePixelRatio' in window && devicePixelRatio > 1);
+        // Check whether the environment should use hi-res maps
+        var hidpi = ('devicePixelRatio' in window && devicePixelRatio > 1);
 
-            var mapContainer = document.getElementById('mapContainer'),
+        var mapContainer = document.getElementById('mapContainer'),
 
             platform = new H.service.Platform({
                 app_code: app_code,
@@ -144,13 +113,6 @@
 
             map.addEventListener("mapviewchangeend", displayReady);
             // calculateRoute();
-        }
         </script>
-      </div>
-    </div>
-  </div>
-</body>
-<script type="text/javascript" src="view-graph.js"></script>
-<script type="text/javascript" src="touch-events.js"></script>
-<script type="text/javascript" src="view-init.js"></script>
+    </body>
 </html>
