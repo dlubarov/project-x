@@ -1,3 +1,6 @@
+// TODO: enable for the demo.
+var SMS_ENABLED = false;
+
 function onSwipeLeft() {
   $('.slide1').animate({ left: '-100%' }, 500);
   $('.slide2').animate({ left: '0' }, 500);
@@ -48,7 +51,7 @@ function onPress() {
 
   display_route(window.homeLocation, element.coords, n, l, t);
 
-  if (element.attendees && element.attendees.length >= 2) {
+  if (SMS_ENABLED && element.attendees && element.attendees.length >= 2) {
     $.ajax({
       type: "POST",
       url: "https://api.twilio.com/2010-04-01/Accounts/AC9a515596e3fa86df283414da18876d05/Messages.json",
