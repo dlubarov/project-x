@@ -72,6 +72,3 @@ function refreshMap() {
   }
   window.oldDataPoints = dataPoints
 }
-
-
-
