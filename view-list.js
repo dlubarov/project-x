@@ -21,6 +21,13 @@ function refreshList(event_list) {
         time.className = 'time';
         item.appendChild(time);
 
+        // Timing details
+        var details = document.createElement('div');
+        var travelTimeMinutes = event_list[e].travelTime();
+        details.appendChild(document.createTextNode('Travel time ' + travelTimeMinutes + ' minutes. Leave by ' + event_list[e].leaveTime() + '.'));
+        details.className = 'time-details';
+        item.appendChild(details);
+
         // Name
         var n = document.createElement('div');
         var t = document.createTextNode( event_list[e].name );

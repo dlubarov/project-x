@@ -53,22 +53,22 @@ function CalEvent(gcal_event){
     routeDistanceInSeconds(this)
   }.bind(this)
   this.travelTime = function(){
-    fl =  (this.routeSummary.trafficeTime / 60.0)
-    return Math.floor(fl)
+    fl =  (this.routeSummary.trafficTime / 60.0)
+    return Math.ceil(fl)
   }.bind(this)
   this.trafficTime = function(){
     fl =  ((this.routeSummary.trafficTime - this.routeSummary.baseTime) / 60.0)
-    return Math.floor(fl)
+    return Math.ceil(fl)
   }.bind(this)
   this.toTime = function(){
     now = new Date
     then = new Date(this.dateTime)
     fl =  ((then - now) / 60 / 1000)
-    return Math.floor(fl)
+    return Math.ceil(fl)
   }.bind(this)
   this.leaveTime = function(){
     then = new Date(this.dateTime)
-    earlier = then - (this.routeSummary.trafficTime)
+    earlier = then - (this.routeSummary.trafficTime * 1000)
     earlierDate = new Date(earlier)
     return formatDate(earlierDate)
   }.bind(this)
