@@ -38,13 +38,8 @@
     </div>
     <div class="slide slide3" style="top: 100%">
       <div id="directions">
-        <div class="noteContainer" style="display:none">
-            <tr>
-                <td>HLP Service releases which are used in this demo:</td>
-                <td>
-                    <div id="releaseInfoTxt" style="left:0; top:0; z-index: 0;" value="Used Service Releases:/n"></div>
-                </td>
-            </tr>
+        <div class="noteContainer">
+            <div id="releaseInfoTxt" style="display:none; left:0; top:0; z-index: 0;" value="Used Service Releases:/n"></div>
         </div>
         <div id="mapContainer" />
         
@@ -54,7 +49,11 @@
             (C) HERE 2014
         */
 
-        function display_route(start_coords, end_coords) {
+        function display_route(start_coords, end_coords, event_name, event_location, event_time) {
+            $('.noteContainer').append('<div id="eventName">' + event_name + '</div>');
+            $('.noteContainer').append('<div id="eventLocation">' + event_location + '</div>');
+            $('.noteContainer').append('<div id="eventTime">' + event_time + '</div>');
+
             // Check whether the environment should use hi-res maps
             var hidpi = ('devicePixelRatio' in window && devicePixelRatio > 1);
 
