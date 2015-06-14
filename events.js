@@ -35,7 +35,7 @@ function handleAuthResult(authResult) {
 }
 
 function startFetchingEvents() {
-  setInterval(refreshEvents, REFRESH_INTERVAL);
+  //setInterval(refreshEvents, REFRESH_INTERVAL);
   refreshEvents();
 }
 
