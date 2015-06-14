@@ -5,21 +5,23 @@
  */
 function addSVGMarkers(map, data, activeId){
   //Create the svg mark-up
-  var svgMarkup = '<svg  width="${OUTER_WIDTH}" height="24" xmlns="http://www.w3.org/2000/svg">' +
-    '<rect fill="${FILL}" x="1" fill-opacity="0.9" y="1" width="${WIDTH}" height="22" />' +
-    '<text x="${X}" y="18" font-size="12pt" font-family="Courier" font-weight="bold" ' +
-    'text-anchor="middle" fill="${STROKE}" >${TEXT}</text></svg>';
+  var svgMarkup = '<svg  width="${OUTER_WIDTH}" height="34" xmlns="http://www.w3.org/2000/svg">' +
+    '<rect fill="${FILL}" rx="2" ry="2" stroke="#000" stroke-width="${STROKE_WIDTH}" x="1" fill-opacity="0.9" y="1" width="${WIDTH}" height="30" />' +
+    '<text x="${X}" y="20" font-size="12pt" font-family="Arial" font-weight="#{FONT_WEIGHT}" ' +
+    'text-anchor="left"  fill="${STROKE}" >${TEXT}</text></svg>';
 
   // Add the first marker
   var textMarker = function(item) {
     var text = item.name;
     return new H.map.Icon(
       svgMarkup
-        .replace('${FILL}', (item.id === activeId) ? 'orange' : 'white')
-        .replace('${STROKE}', '000')
-        .replace('${OUTER_WIDTH}', text.length*12)
-        .replace('${WIDTH}', text.length*12)
-        .replace('${X}', text.length*6)
+        .replace('${FILL}', (item.id === activeId) ? "#15326c" : "#333")
+        .replace('${FONT_WEIGHT}', (item.id === activeId) ? "bold" : "normal")
+        .replace('${STROKE}', '#fff')
+        .replace('${STROKE_WIDTH}', (item.id === activeId) ? "1" : "0")
+        .replace('${OUTER_WIDTH}', text.length*11)
+        .replace('${WIDTH}', text.length*10)
+        .replace('${X}', text.length*1.5)
         .replace('${TEXT}', text)
       )
   }
