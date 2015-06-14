@@ -1,14 +1,25 @@
-function touchEvent(event) {
-  if (event == 'switch') {
-    $('.slide1').toggle()
-    $('.slide2').toggle()
-  } else if (event == 'clockwise'){
-    modifyActiveId(true, getEventList())
-    refreshAll()
-    hardRefreshMap()
-  } else if (event == 'counterclockwise'){
-    modifyActiveId(false, getEventList())
-    refreshAll()
-    hardRefreshMap()
-  }
+function onSwipeLeft() {
+  $('.slide1').hide();
+  $('.slide2').show();
+}
+
+function onSwipeRight() {
+  $('.slide1').show();
+  $('.slide2').hide();
+}
+
+function onRotateClockwise() {
+  modifyActiveId(true, getEventList())
+  refreshAll()
+  hardRefreshMap()
+}
+
+function onRotateCounterClockwise() {
+  modifyActiveId(false, getEventList())
+  refreshAll()
+  hardRefreshMap()
+}
+
+function onSelect() {
+  alert('select');
 }
