@@ -1,7 +1,6 @@
 function refreshList(event_list) {
     $('#items').empty();
 
-
     for(var e = 0; e < event_list.length; e += 1) {
         // Create an 'item' div
         var item = document.createElement('div');
@@ -20,13 +19,20 @@ function refreshList(event_list) {
             window.activeId = this.event_id;
         }
 
-        // Add the name and location divs
+        // Time
+        var time = document.createElement('div');
+        time.appendChild(document.createTextNode(event_list[e].time));
+        time.className = 'time';
+        item.appendChild(time);
+
+        // Name
         var n = document.createElement('div');
         var t = document.createTextNode( event_list[e].name );
         n.appendChild( t );
         item.appendChild( n );
         n.className += ' name';
 
+        // Location
         var location = document.createElement('div');
         var t = document.createTextNode( event_list[e].location );
         location.appendChild( t );

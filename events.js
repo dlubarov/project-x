@@ -59,11 +59,27 @@ function refreshEvents() {
       requestCoordinates(gcal_event.location);
       return {
         'id': gcal_event.id,
+        'time': formatDate(new Date(gcal_event.start.dateTime)),
         'name': gcal_event.summary,
         'location': gcal_event.location,
       };
     });
   });
+}
+
+function formatDate(date) {
+  var h = date.getHours().toString();
+  var suffix;
+  if (h > 12) {
+    h -= 12;
+    suffix = 'pm'
+  } else {
+    suffix = 'am'
+  }
+  var m = date.getMinutes().toString();
+  if (m.length == 1)
+    m = "0" + m;
+  return h + ':' + m + ' ' + suffix;
 }
 
 function requestCoordinates(location) {
