@@ -21,6 +21,7 @@ function calendarSetup() {
 function getEventList() {
   return events.map(function(e) {
     e.coordinates = reverseGeocoderResults[e.location];
+    routeDistanceInSeconds(e)
     return e;
   });
 }
