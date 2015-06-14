@@ -26,6 +26,7 @@ function getEventList() {
   });
 }
 
+
 function handleAuthResult(authResult) {
   if (authResult && !authResult.error) {
     gapi.client.load('calendar', 'v3', startFetchingEvents);
@@ -38,6 +39,15 @@ function handleAuthResult(authResult) {
 function startFetchingEvents() {
   setInterval(refreshEvents, REFRESH_INTERVAL);
   refreshEvents();
+}
+
+function CalEvent(gcal_event){
+  requestCoordinates(gcal_event.location);
+  this.id = gcal_event.id;
+  this.time = formatDate(new Date(gcal_event.start.dateTime));
+  this.name = gcal_event.summary;
+  this.location = gcal_event.location;
+  return this
 }
 
 function refreshEvents() {
@@ -56,15 +66,7 @@ function refreshEvents() {
   });
 
   request.execute(function(resp) {
-    events = resp.items.map(function(gcal_event) {
-      requestCoordinates(gcal_event.location);
-      return {
-        'id': gcal_event.id,
-        'time': formatDate(new Date(gcal_event.start.dateTime)),
-        'name': gcal_event.summary,
-        'location': gcal_event.location,
-      };
-    });
+    events = resp.items.map(function(gcal_event) { return new CalEvent(gcal_event)});
   });
 }
 
