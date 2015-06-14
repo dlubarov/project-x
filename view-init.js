@@ -1,6 +1,5 @@
 $('.slide2').hide()
 
-
 window.activeId = null
 
 var INTERVAL = 1000;
@@ -13,6 +12,9 @@ function setupAll() {
   }
   refreshAll()
   hardRefreshMap()
+
+  // Say the content of the heading
+  responsiveVoice.speak( $('h1').text() );
 }
 
 function refreshAll(){
