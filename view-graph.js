@@ -6,7 +6,7 @@
 function addSVGMarkers(map, data, activeId){
   //Create the svg mark-up
   var svgMarkup = '<svg  width="${OUTER_WIDTH}" height="34" xmlns="http://www.w3.org/2000/svg">' +
-    '<rect fill="${FILL}" rx="2" ry="2" stroke="#000" stroke-width="${STROKE_WIDTH}" x="1" fill-opacity="0.9" y="1" width="${WIDTH}" height="30" />' +
+    '<rect fill="${FILL}" rx="2" ry="2" stroke="#000" stroke-width="${STROKE_WIDTH}" x="1" fill-opacity="${OPACITY}" y="1" width="${WIDTH}" height="30" />' +
     '<text x="${X}" y="20" font-size="12pt" font-family="Arial" font-weight="#{FONT_WEIGHT}" ' +
     'text-anchor="left"  fill="${STROKE}" >${TEXT}</text></svg>';
 
@@ -18,6 +18,7 @@ function addSVGMarkers(map, data, activeId){
         .replace('${FILL}', (item.id === activeId) ? "#15326c" : "#333")
         .replace('${FONT_WEIGHT}', (item.id === activeId) ? "bold" : "normal")
         .replace('${STROKE}', '#fff')
+        .replace('${OPACITY}', (item.id === activeId) ? "1" : item.opacity())
         .replace('${STROKE_WIDTH}', (item.id === activeId) ? "1" : "0")
         .replace('${OUTER_WIDTH}', text.length*11)
         .replace('${WIDTH}', text.length*10)
