@@ -26,9 +26,11 @@ function addSVGMarkers(map, data, activeId){
 
   for (i = 0; i < data.length; i++) {
     item = data[i]
-    marker = new H.map.Marker({lat: item.coordinates.lat, lng: item.coordinates.lng },
-      {icon: textMarker(item)});
-    map.addObject(marker);
+    if(item.coordinates != undefined && item.coordinates.lat != undefined && item.coordinates.lng != undefined){
+      marker = new H.map.Marker({lat: item.coordinates.lat, lng: item.coordinates.lng },
+        {icon: textMarker(item)});
+      map.addObject(marker);
+    }
   }
 }
 
