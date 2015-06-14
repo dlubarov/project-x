@@ -13,6 +13,12 @@ pubnub.subscribe({
        case "swipeRight":
          onSwipeRight();
          break;
+       case "swipeUp":
+         onSwipeUp();
+         break;
+       case "swipeDown":
+         onSwipeDown();
+         break;
        case "clockWise":
          onRotateClockwise();
          break;
