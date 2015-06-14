@@ -27,6 +27,8 @@ pubnub.subscribe({
          break;
        case "select":
          onPress();
+       case "touchpadSelect":
+         onPressTouchpad();
      }
    },
    error: function (error) {

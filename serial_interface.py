@@ -37,9 +37,12 @@ while True:
     elif command =='cceFavoritePressed' or command =='touchpadFavoriteTouched': 
           print 'I detected Favorite button pressed or touched!'
           print(pubnub.publish('demo', 'Favorite'))
-    elif command =='selectPressed' or command=='touchpadAreaPressed':
+    elif command =='selectPressed':
           print 'I detected Select option!'
           print(pubnub.publish('demo', 'select'))
+    elif command =='touchpadAreaPressed':
+          print 'I detected Touchpad Select option!'
+          print(pubnub.publish('demo', 'touchpadSelect'))
     elif command =='swipeUp':
           print 'I detected swipeUp!'
           print(pubnub.publish('demo', 'swipeUp'))

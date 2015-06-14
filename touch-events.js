@@ -42,7 +42,7 @@ function onPress() {
   var l = $(element).find('.location').text();
   var t = $(element).find('.time').text();
 
-  // Say the selected event
+  // Say directions
   responsiveVoice.speak( 'Getting directions to ' + l );
 
   $('.slide1').animate({ top: '-100%' }, 500);
@@ -69,4 +69,15 @@ function onPress() {
       console.log(e);
     });
   }
+}
+
+function onPressTouchpad() {
+  var element = $('.item').filter(function() { return this.event_id == activeId; })[0];
+
+  var n = $(element).find('.name').text();
+  var l = $(element).find('.location').text();
+  var t = $(element).find('.time').text();
+
+  // Say the selected event
+  responsiveVoice.speak( n + ' at ' + l + ' at ' + t );
 }
