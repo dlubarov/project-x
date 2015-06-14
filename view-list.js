@@ -1,5 +1,3 @@
-var selected_event_id;
-
 function refreshList(event_list) {
     $('#items').empty();
 
@@ -11,7 +9,7 @@ function refreshList(event_list) {
         item.className = 'item';
         item.event_id = event_list[e].id;
 
-        if( event_list[e].id == selected_event_id ) {
+        if( event_list[e].id == window.activeId ) {
             item.className += ' selected-item';
         }
 
@@ -19,7 +17,7 @@ function refreshList(event_list) {
         item.onclick = function(e) {
             $('.selected-item').removeClass('selected-item');
             this.className += ' selected-item';
-            selected_event_id = this.event_id;
+            window.activeId = this.event_id;
         }
 
         // Add the name and location divs
