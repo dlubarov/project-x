@@ -5,15 +5,15 @@
  */
 function addSVGMarkers(map, data, activeId){
   //Create the svg mark-up
-  var svgMarkup = '<svg  width="${OUTER_WIDTH}" height="26" xmlns="http://www.w3.org/2000/svg">' +
-    '<rect fill="${FILL}" stroke="#fff" stroke-width="0" x="1" fill-opacity="${OPACITY}" y="1" width="${WIDTH}" height="30" />' +
-    '<text x="90" y="20" font-size="13pt" font-family="Arial" text-anchor="start"  fill="${STROKE}" >${TEXT}</text>' +
-    '<text x="${X}" y="20" font-size="14pt" font-family="Arial" font-weight="bold" text-anchor="end" fill="${TIME_STROKE}" >${TIME_INFO}</text>' +
+  var svgMarkup = '<svg  width="${OUTER_WIDTH}" height="36" xmlns="http://www.w3.org/2000/svg">' +
+    '<rect fill="${FILL}" stroke="#fff" stroke-width="0" x="1" fill-opacity="${OPACITY}" y="1" width="${WIDTH}" height="36" />' +
+    '<text x="100" y="25" font-size="16pt" font-family="Arial" text-anchor="start"  fill="${STROKE}" >${TEXT}</text>' +
+    '<text x="${X}" y="25" font-size="16pt" font-family="Arial" font-weight="bold" text-anchor="end" fill="${TIME_STROKE}" >${TIME_INFO}</text>' +
     '</svg>';
 
   // Add the first marker
   var textMarker = function(item) {
-    var time = item.leaveTime().toUpperCase().replace(/\s/g, '')
+    var time = item.leaveTime().replace(/\s/g, '')
     var text = item.name
     return new H.map.Icon(
       svgMarkup
@@ -24,9 +24,9 @@ function addSVGMarkers(map, data, activeId){
         .replace('${TIME_INFO}', time)
         .replace('${OPACITY}', (item.id === activeId) ? "1" : item.opacity())
         .replace('${STROKE_WIDTH}', (item.id === activeId) ? "1" : "0")
-        .replace('${OUTER_WIDTH}', (text.length*11 + 50))
-        .replace('${WIDTH}', text.length*11 + 40)
-        .replace('${X}', text.length*1.5 + 40)
+        .replace('${OUTER_WIDTH}', (text.length*12 + 70))
+        .replace('${WIDTH}', text.length*12 + 70)
+        .replace('${X}', text.length*1.5 + 60)
         .replace('${TEXT}', text)
       )
   }
