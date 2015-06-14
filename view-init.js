@@ -7,15 +7,27 @@ var INTERVAL = 1000;
 
 function setupAll() {
   setInterval(refreshAll, INTERVAL);
-  window.activeId = getEventList()[0].id
+  var event_list = getEventList();
+  if (activeId == null && (event_list.length != 0)){
+    activeId = event_list[0].id
+  }
   refreshAll()
 }
 
 function refreshAll(){
   var event_list = getEventList();
-  if (activeId == null && (event_list.length != 0)){
-    activeId = event_list[0].id
-  }
   refreshList(event_list)
   setupMap(event_list)
+}
+
+function modifyActiveId(increase, dataPoints) {
+  index = _.findIndex(dataPoints, function(i){ return i.id == activeId })
+  if (increase) {
+    newIndex = index + 1
+  } else {
+    newIndex = index - 1
+  }
+  newIndex += dataPoints.length
+  newIndex %= dataPoints.length
+  activeId = dataPoints[newIndex].id
 }

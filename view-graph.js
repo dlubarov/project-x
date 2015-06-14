@@ -81,28 +81,6 @@ var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
 // Create the default UI components
 var ui = H.ui.UI.createDefault(map, defaultLayers);
 
-function modifyActiveId(increase, dataPoints) {
-  index = _.findIndex(dataPoints, function(i){ return i.id == activeId })
-  if (increase) {
-    newIndex = index + 1
-  } else {
-    newIndex = index - 1
-  }
-  newIndex += dataPoints.length
-  newIndex %= dataPoints.length
-  activeId = dataPoints[newIndex].id
-}
-
-function incGraph(){
-  modifyActiveId(true, dataPoints)
-  refresh()
-}
-
-function decGraph(){
-  modifyActiveId(false, dataPoints)
-  refresh()
-}
-
 function setupMap() {
   dataPoints = getEventList();
   map.removeObjects(map.getObjects())
