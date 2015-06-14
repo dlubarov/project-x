@@ -2,6 +2,15 @@ window.activeId = null
 
 var INTERVAL = 1000;
 
+window.platform = new H.service.Platform({
+            app_code: app_code,
+            app_id: app_id,
+            useCIT: true,
+            useHTTPS: true,
+        });
+
+window.router = platform.getRoutingService();
+
 function setupAll() {
   setInterval(refreshAll, INTERVAL);
   var event_list = getEventList();
