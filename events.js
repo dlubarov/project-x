@@ -47,6 +47,7 @@ function CalEvent(gcal_event){
   this.time = formatDate(new Date(gcal_event.start.dateTime));
   this.name = gcal_event.summary;
   this.location = gcal_event.location;
+  this.attendees = gcal_event.attendees;
   this.setup = function(){
     this.coordinates = reverseGeocoderResults[this.location];
     routeDistanceInSeconds(this)
@@ -74,7 +75,7 @@ function CalEvent(gcal_event){
 function refreshEvents() {
   var timeMin = new Date();
   var timeMax = new Date();
-  timeMax.setHours(timeMax.getHours() + 12);
+  timeMax.setHours(timeMax.getHours() + 24);
 
   var request = gapi.client.calendar.events.list({
     'calendarId': 'primary',

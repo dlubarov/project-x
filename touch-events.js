@@ -47,4 +47,23 @@ function onPress() {
   $('.slide3').animate({ top: '0' }, 500);
 
   display_route(window.homeLocation, element.coords, n, l, t);
+
+  if (element.attendees && element.attendees.length >= 2) {
+    $.ajax({
+      type: "POST",
+      url: "https://api.twilio.com/2010-04-01/Accounts/AC9a515596e3fa86df283414da18876d05/Messages.json",
+      data: {
+        To: "+1 650 215 8697",
+        From: "+1 650 817 7427",
+        Body: "Peter is on his way to " + element.event_location + "!"
+      },
+      beforeSend: function(xhr) {
+        xhr.setRequestHeader("Authorization", "Basic " + btoa("AC9a515596e3fa86df283414da18876d05:5c1b7d68eb1d7757103674b1556d6467"));
+      },
+    })
+    .fail(function(e) {
+      console.log("failed to send SMS");
+      console.log(e);
+    });
+  }
 }
