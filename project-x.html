@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <title>Chloe</title>
     <link rel="stylesheet" type="text/css" href="reset.css"></link>
     <link rel="stylesheet" type="text/css" href="style.css"></link>
     <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
     <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     <link rel="stylesheet" type="text/css"
       href="https://js.api.here.com/v3/3.0/mapsjs-ui.css" />
+    <link rel="stylesheet" type="text/css" href="defaults.css">
     <script type="text/javascript" charset="UTF-8"
       src="https://js.api.here.com/v3/3.0/mapsjs-core.js"></script>
     <script type="text/javascript" charset="UTF-8"
@@ -15,6 +17,8 @@
       src="https://js.api.here.com/v3/3.0/mapsjs-ui.js"></script>
     <script type="text/javascript" charset="UTF-8"
       src="https://js.api.here.com/v3/3.0/mapsjs-mapevents.js"></script>
+    <script type="text/javascript" charset="UTF-8" src="defaults.js"></script>
+    <script type="text/javascript" charset="UTF-8" src="releaseRequests.js"></script>
     <script src="http://code.responsivevoice.org/responsivevoice.js"></script>
     <script src="lodash.js"></script>
     <script src="http://cdn.pubnub.com/pubnub-3.7.1.min.js"></script>
@@ -30,7 +34,119 @@
       <div id="items"></div>
     </div>
     <div class="slide slide2">
-      <div id="map" style="width: 100%; height: 700px; background: grey" />
+      <div id="map" style="width: 100%; height: 700px; background: grey"></div>
+    </div>
+    <div class="slide slide3">
+      <div id="directions">
+        <div class="noteContainer" style="display:none">
+            <tr>
+                <td>HLP Service releases which are used in this demo:</td>
+                <td>
+                    <div id="releaseInfoTxt" style="left:0; top:0; z-index: 0;" value="Used Service Releases:/n"></div>
+                </td>
+            </tr>
+        </div>
+        <div id="mapContainer" />
+        
+        <script type="text/javascript">
+        /* 
+            author domschuette
+            (C) HERE 2014
+        */
+
+        function display_route() {
+            // Check whether the environment should use hi-res maps
+            var hidpi = ('devicePixelRatio' in window && devicePixelRatio > 1);
+
+            var mapContainer = document.getElementById('mapContainer'),
+
+            platform = new H.service.Platform({
+                app_code: app_code,
+                app_id: app_id,
+                useCIT: true, 
+                useHTTPS: true,
+            }),
+            maptypes = platform.createDefaultLayers(hidpi ? 512 : 256, hidpi ? 320 : null),
+            router = platform.getRoutingService(),
+            
+            map = new H.Map(mapContainer, maptypes.normal.map, 
+                {
+                    center: new H.geo.Point((37.586605 + 37.490957) / 2, (-122.347502 + -122.237456) / 2),
+                    zoom: 12
+                }
+            );
+            
+            // add behavior control
+            new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
+            
+            // Enable the default UI
+            var ui = H.ui.UI.createDefault(map, maptypes);
+            //add JS API Release information
+            releaseInfoTxt.innerHTML+="JS API: 3."+ H.buildInfo().version;
+    
+            //add MRS Release information
+            loadMRSVersionTxt();
+
+            //helper
+            var releaseRoutingShown = false;
+            
+            // setup the Streetlevel imagery
+            platform.configure(H.map.render.panorama.RenderEngine);
+            
+            window.addEventListener('resize', function() { map.getViewPort().resize(); });
+            
+            function calculateRoute()
+            {
+                var calculateRouteParams = {
+                    'waypoint0': 37.586605 + "," + -122.347502,
+                    'waypoint1': 37.490957 + "," + -122.237456,                  
+                    'mode': 'fastest;car;traffic:disabled',
+                    'representation': 'display'
+                },
+                onResult = function(result) {
+                      //add Routing Release number if not already done
+                    if (releaseRoutingShown== false){
+                        releaseInfoTxt.innerHTML+="<br />HLP Routing: "+result.response.metaInfo.moduleVersion; 
+                        releaseRoutingShown = true;
+                    }
+                    var strip = new H.geo.Strip(),
+                        shape = result.response.route[0].shape, 
+                        i,
+                        l = shape.length;
+                
+                    for(i = 0; i < l; i++)
+                    {
+                        strip.pushLatLngAlt.apply(strip, shape[i].split(',').map(function(item) { return parseFloat(item); }));
+                    }
+                    var polyline = new H.map.Polyline(strip, 
+                    {
+                        style: 
+                        {
+                            lineWidth: 10,
+                            strokeColor: "rgba(0, 128, 0, 0.7)"
+                        }   
+                    });
+                    
+                    map.addObject(polyline);
+                },
+                onError = function(error) {
+                    console.log(error);
+                }
+                router.calculateRoute(calculateRouteParams, onResult, onError);
+            }
+            
+            var displayReady = function(e)
+            {
+                console.log("fire"); 
+                map.removeEventListener("mapviewchangeend", displayReady); 
+                calculateRoute();
+            };
+
+            map.addEventListener("mapviewchangeend", displayReady);
+            // calculateRoute();
+        }
+        </script>
+      </div>
     </div>
   </div>
 </body>

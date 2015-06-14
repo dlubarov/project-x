@@ -32,4 +32,9 @@ function onPress() {
 
   // Say the selected event
   responsiveVoice.speak( n + ' at ' + l + ' at ' + t );
+
+  $('.slide1').animate({ top: '-100%' }, 500);
+  $('.slide2').animate({ top: '-100%' }, 500);
+  $('.slide3').animate({ left: '0' }, 500);
+  display_route();
 }
