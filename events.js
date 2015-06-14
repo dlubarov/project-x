@@ -1,5 +1,5 @@
-var MAX_EVENTS = 8;
-var REFRESH_INTERVAL = 500000;
+var MAX_EVENTS = 20;
+var REFRESH_INTERVAL = 2000;
 
 var events = [];
 var reverseGeocoderResults = {};

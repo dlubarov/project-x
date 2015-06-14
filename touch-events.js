@@ -1,5 +1,4 @@
-// TODO: enable for the demo.
-var SMS_ENABLED = false;
+var SMS_ENABLED = true;
 
 function onSwipeLeft() {
   $('.slide1').css({position: 'absolute', height: '100%'});
