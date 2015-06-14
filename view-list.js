@@ -12,19 +12,6 @@ function refreshList(event_list) {
             item.className += ' selected-item';
         }
 
-        // Add onclick event (for now)
-        item.onclick = function(e) {
-            $('.selected-item').removeClass('selected-item');
-            selectItem(this.event_id);
-
-            var n = $(this).find('.name').text();
-            var l = $(this).find('.location').text();
-            var t = $(this).find('.time').text();
-
-            // Say the selected event
-            responsiveVoice.speak( n + ' at ' + l + ' at ' + t );
-        }
-
         // Time
         var time = document.createElement('div');
         time.appendChild(document.createTextNode(event_list[e].time));

@@ -6,7 +6,6 @@ var pubnub = PUBNUB.init({
 pubnub.subscribe({
    channel: 'demo',
    message: function(m){
-     console.log(m);
      switch (m) {
        case "swipeLeft":
          onSwipeLeft();
@@ -21,7 +20,7 @@ pubnub.subscribe({
          onRotateCounterClockwise();
          break;
        case "select":
-         onSelect();
+         onPress();
      }
    },
    error: function (error) {
