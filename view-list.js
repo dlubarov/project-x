@@ -1,8 +1,5 @@
-var selected_event_id;
-
 function refreshList(event_list) {
     $('#items').empty();
-
 
     for(var e = 0; e < event_list.length; e += 1) {
         // Create an 'item' div
@@ -11,7 +8,7 @@ function refreshList(event_list) {
         item.className = 'item';
         item.event_id = event_list[e].id;
 
-        if( event_list[e].id == selected_event_id ) {
+        if( event_list[e].id == window.activeId ) {
             item.className += ' selected-item';
         }
 
@@ -19,16 +16,23 @@ function refreshList(event_list) {
         item.onclick = function(e) {
             $('.selected-item').removeClass('selected-item');
             this.className += ' selected-item';
-            selected_event_id = this.event_id;
+            window.activeId = this.event_id;
         }
 
-        // Add the name and location divs
+        // Time
+        var time = document.createElement('div');
+        time.appendChild(document.createTextNode(event_list[e].time));
+        time.className = 'time';
+        item.appendChild(time);
+
+        // Name
         var n = document.createElement('div');
         var t = document.createTextNode( event_list[e].name );
         n.appendChild( t );
         item.appendChild( n );
         n.className += ' name';
 
+        // Location
         var location = document.createElement('div');
         var t = document.createTextNode( event_list[e].location );
         location.appendChild( t );
