@@ -45,6 +45,7 @@ function CalEvent(gcal_event){
   this.time = formatDate(new Date(gcal_event.start.dateTime));
   this.name = gcal_event.summary;
   this.location = gcal_event.location;
+  this.attendees = gcal_event.attendees;
   this.setup = function(){
     this.coordinates = reverseGeocoderResults[this.location];
     routeDistanceInSeconds(this)

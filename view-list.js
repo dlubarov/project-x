@@ -9,6 +9,7 @@ function refreshList(event_list) {
         item.event_id = event_list[e].id;
         item.event_location = event_list[e].location;
         item.coords = event_list[e].coordinates;
+        item.attendees = event_list[e].attendees;
 
         if( event_list[e].id == window.activeId ) {
             item.className += ' selected-item';
