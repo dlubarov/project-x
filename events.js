@@ -73,7 +73,7 @@ function CalEvent(gcal_event){
     return formatDate(earlierDate)
   }.bind(this)
   this.opacity = function(){
-    min = 0.1
+    min = 0.2
     max = 1
     diff = (1-(this.toTime() / maxToTime())) * (max - min)
     return min + diff
